@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="vue_test">
-    <title>Vue Test</title>
+    <title id="main_title">{{ title }}</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 
@@ -24,10 +24,18 @@
                 {{ item.text }}
             </li>
         </ul>
+        <p>
+            <button v-on:click="reverse">Reverse</button>
+        </p>
+        <img v-bind:title="imgTitle" v-bind:src="imgSrc" v-bind:alt="imgAlt">
+            <!-- Cat from http://www.cutestpaw.com/articles/50-cute-cats-make-your-life-happier/-->
+            <!-- Doge from https://www.techrepublic.com/pictures/such-tech-much-doge-15-of-our-own-it-inspired-memes/4/-->
+        <br>
+        <button v-on:click="swap">{{ buttonName }}</button>
     </div>
 
     <div id="vue_hover_text">
-        <img v-bind:title="title" src="To-infinity-and-beyond.jpeg" alt="cat in cardboard spaceship">
+        
     </div>
 
     <div id="dynamo">
