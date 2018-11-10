@@ -18,7 +18,7 @@
     </div>
 
     <div id="list_and_array">
-        <p>Here are some names for felines: </p>
+        <p>{{ lede }}</p>
         <ul>
             <li v-for="item in myList">
                 {{ item.text }}
@@ -32,10 +32,6 @@
             <!-- Doge from https://www.techrepublic.com/pictures/such-tech-much-doge-15-of-our-own-it-inspired-memes/4/-->
         <br>
         <button v-on:click="swap">{{ buttonName }}</button>
-    </div>
-
-    <div id="vue_hover_text">
-        
     </div>
 
     <div id="dynamo">

@@ -6,3 +6,8 @@ div {
 li {
     padding-left: 1rem;
 }
+
+img {
+    width: 480px;
+    height: 360px;
+}
