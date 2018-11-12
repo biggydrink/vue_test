@@ -41,7 +41,7 @@
     
     <span v-if="seen">Now you see me</span>
     <br>
-    <button v-on:click="hide">{{ button_txt }}</button>
+    <button v-bind:class="buttonClass" v-on:click="hide">{{ button_txt }}</button>
     </div>
 
 

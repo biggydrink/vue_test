@@ -13,6 +13,8 @@ let text = new Vue({
     }
 });
 
+
+
 let list = new Vue({
     el: '#list_and_array',
     data: {
@@ -26,7 +28,7 @@ let list = new Vue({
         cats: true,
         lede: "Here are some names for felines:",
         buttonName: 'See Dogs',
-        buttonClass: 'cat',
+        buttonClass: 'button_cat',
         imgSrc: "To-infinity-and-beyond.jpeg",
         imgAlt: "cat in cardboard spaceship",
         imgTitle: "You, my friend, are responsible for delaying my rendezvous with star command!",
@@ -44,12 +46,13 @@ let list = new Vue({
                 ];
                 this.lede = "Here are some names for canines:";
                 this.buttonName = "See Cats";
-                this.buttonClass = "dog";
+                this.buttonClass = "button_dog";
                 this.imgSrc = "codedoge.jpg";
                 this.imgAlt = "doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow";
                 this.imgTitle = "such title";
                 this.cats = false;
-                console.log('cats was true')
+                
+                condition.buttonClass = this.buttonClass;
             } else {
                 this.myList = [
                     { text: 'Kitty'},
@@ -60,12 +63,13 @@ let list = new Vue({
                 ];
                 this.lede = "Here are some names for felines:";
                 this.buttonName = "See Dogs";
-                this.buttonClass = "cat";
+                this.buttonClass = "button_cat";
                 this.imgSrc = "To-infinity-and-beyond.jpeg";
                 this.imgAlt = "cat in cardboard spaceship";
                 this.imgTitle = "You, my friend, are responsible for delaying my rendezvous with star command!!";
                 this.cats = true;
-                console.log('cats was false')
+                
+                condition.buttonClass = this.buttonClass;
             }
         },
         reverse: function() {
@@ -88,7 +92,8 @@ let condition = new Vue({
     el: '#v-if',
     data: {
         seen: true,
-        button_txt: "Hide"
+        button_txt: "Hide",
+        buttonClass: list.buttonClass
     },
     methods: {
         hide: function() {
