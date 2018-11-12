@@ -25,7 +25,8 @@ let list = new Vue({
         ],
         cats: true,
         lede: "Here are some names for felines:",
-        buttonName: 'Dogs',
+        buttonName: 'See Dogs',
+        buttonClass: 'cat',
         imgSrc: "To-infinity-and-beyond.jpeg",
         imgAlt: "cat in cardboard spaceship",
         imgTitle: "You, my friend, are responsible for delaying my rendezvous with star command!",
@@ -42,7 +43,8 @@ let list = new Vue({
                     {text: '개'}
                 ];
                 this.lede = "Here are some names for canines:";
-                this.buttonName = "Cats";
+                this.buttonName = "See Cats";
+                this.buttonClass = "dog";
                 this.imgSrc = "codedoge.jpg";
                 this.imgAlt = "doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow";
                 this.imgTitle = "such title";
@@ -57,7 +59,8 @@ let list = new Vue({
                     { text: '고양이 새끼'}
                 ];
                 this.lede = "Here are some names for felines:";
-                this.buttonName = "Dogs";
+                this.buttonName = "See Dogs";
+                this.buttonClass = "cat";
                 this.imgSrc = "To-infinity-and-beyond.jpeg";
                 this.imgAlt = "cat in cardboard spaceship";
                 this.imgTitle = "You, my friend, are responsible for delaying my rendezvous with star command!!";

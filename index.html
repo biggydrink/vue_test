@@ -25,13 +25,11 @@
             </li>
         </ul>
         <p>
-            <button v-on:click="reverse">Reverse</button>
+            <button v-bind:class="buttonClass" v-on:click="reverse">Reverse</button>  <button v-on:click="swap" v-bind:class="buttonClass">{{ buttonName }}</button>
         </p>
         <img v-bind:title="imgTitle" v-bind:src="imgSrc" v-bind:alt="imgAlt">
             <!-- Cat from http://www.cutestpaw.com/articles/50-cute-cats-make-your-life-happier/-->
             <!-- Doge from https://www.techrepublic.com/pictures/such-tech-much-doge-15-of-our-own-it-inspired-memes/4/-->
-        <br>
-        <button v-on:click="swap">{{ buttonName }}</button>
     </div>
 
     <div id="dynamo">

@@ -11,3 +11,15 @@ img {
     width: 480px;
     height: 360px;
 }
+
+button.cat {
+    color: #FFFFFF;
+    background-color: #F18A60;
+    border-color: #FF7B4A;
+}
+
+button.dog {
+    color: #FFFFFF;
+    background-color: #083575;
+    border-color: #383A70;
+}
