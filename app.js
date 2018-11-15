@@ -19,34 +19,43 @@ let list = new Vue({
     el: '#list_and_array',
     data: {
         myList: [
-            { text: 'Kitties'},
-            { text: 'Cats'},
-            { text: 'Kittens'},
-            { text: '고양이'},
-            { text: '고양이 새끼'}
+            'Kitties',
+            'Cats',
+            'Kittens',
+            '고양이',
+            '고양이 새끼'
         ],
         cats: true,
         lede: "Here are some names for felines:",
-        buttonName: 'See Dogs',
-        buttonClass: 'button_cat',
         imgSrc: "To-infinity-and-beyond.jpeg",
         imgAlt: "cat in cardboard spaceship",
         imgTitle: "You, my friend, are responsible for delaying my rendezvous with star command!",
+        buttonClass: 'button_cat',
+        swapButton: {
+            buttonText: 'See Dogs',
+        },
+        addButton: {
+            buttonText: 'Add',
+        },
+        reverseButton: {
+            buttonText: 'Reverse',
+        }
+        
     },
 
     methods: {
         swap: function() {
             if (this.cats) {
                 this.myList = [
-                    {text: 'Doggo'}, 
-                    {text: 'Pup'}, 
-                    {text: 'Dogs'}, 
-                    {text: 'Doge'},
-                    {text: '개'}
+                    'Doggo',
+                    'Pup',
+                    'Dogs',
+                    'Doge',
+                    '개'
                 ];
                 this.lede = "Here are some names for canines:";
-                this.buttonName = "See Cats";
-                this.buttonClass = "button_dog";
+                this.swapButton.buttonText = "See Cats";
+                this.buttonClass = 'button_dog';
                 this.imgSrc = "codedoge.jpg";
                 this.imgAlt = "doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow";
                 this.imgTitle = "such title";
@@ -55,14 +64,14 @@ let list = new Vue({
                 condition.buttonClass = this.buttonClass;
             } else {
                 this.myList = [
-                    { text: 'Kitty'},
-                    { text: 'Cat'},
-                    { text: 'Kitten'},
-                    { text: '고양이'},
-                    { text: '고양이 새끼'}
+                    'Kitty',
+                    'Cat',
+                    'Kitten',
+                    '고양이',
+                    '고양이 새끼'
                 ];
                 this.lede = "Here are some names for felines:";
-                this.buttonName = "See Dogs";
+                this.swapButton.buttonText = "See Dogs";
                 this.buttonClass = "button_cat";
                 this.imgSrc = "To-infinity-and-beyond.jpeg";
                 this.imgAlt = "cat in cardboard spaceship";
@@ -74,8 +83,18 @@ let list = new Vue({
         },
         reverse: function() {
             for (i = 0; i < list.myList.length; i++ ) {
-                list.myList[i].text = list.myList[i].text.split('').reverse().join('');
+                /* 
+                must use Vue.set instead of updating via list[index] so that Vue's getters/setters can run and get reactivity
+                can also use push/pop
+                https://medium.com/js-dojo/reactivity-in-vue-js-and-its-pitfalls-de07a29c9407
+                This is also probably why the tutorial uses objects with a 'text' string attriute instead of a plain list of strings like i do here
+                If you use objects and update the object.text attribute, then we have getters and setters again, and therefore reactivity
+                */
+                Vue.set(list.myList, i, list.myList[i].split('').reverse().join(''));
             }
+        },
+        add: function() {
+            // nothing yet
         }
     }
 });
@@ -89,10 +108,10 @@ let dynamic = new Vue({
 });
 
 let condition = new Vue({
-    el: '#v-if',
+    el: '#conditional',
     data: {
         seen: true,
-        button_txt: "Hide",
+        buttonText: "Hide",
         buttonClass: list.buttonClass
     },
     methods: {
@@ -100,10 +119,10 @@ let condition = new Vue({
             
             if (this.seen) {
                 this.seen = false;
-                this.button_txt = "Unhide";
+                this.buttonText = "Unhide";
             } else {
                 this.seen = true;
-                this.button_txt = "Hide";
+                this.buttonText = "Hide";
             }
         }
     }

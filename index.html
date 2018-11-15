@@ -21,11 +21,13 @@
         <p>{{ lede }}</p>
         <ul>
             <li v-for="item in myList">
-                {{ item.text }}
+                {{ item }}
             </li>
         </ul>
         <p>
-            <button v-bind:class="buttonClass" v-on:click="reverse">Reverse</button>  <button v-on:click="swap" v-bind:class="buttonClass">{{ buttonName }}</button>
+            <button v-on:click="reverse" v-bind:class="buttonClass">{{ reverseButton.buttonText }}</button>  
+            <button v-on:click="swap" v-bind:class="buttonClass">{{ swapButton.buttonText }}</button>  
+            <button v-on:click="add" v-bind:class="buttonClass">{{ addButton.buttonText }}</button>
         </p>
         <img v-bind:title="imgTitle" v-bind:src="imgSrc" v-bind:alt="imgAlt">
             <!-- Cat from http://www.cutestpaw.com/articles/50-cute-cats-make-your-life-happier/-->
@@ -37,11 +39,13 @@
         <input v-model="message">
     </div>
 
-    <div id="v-if">
+    <div id="conditional">
     
+        <!-- Can v-if set anything besides visibility? -->
+        <!-- How does the visibility actually work? Just removes it from the page i guess? -->
     <span v-if="seen">Now you see me</span>
     <br>
-    <button v-bind:class="buttonClass" v-on:click="hide">{{ button_txt }}</button>
+    <button v-bind:class="buttonClass" v-on:click="hide">{{ buttonText }}</button>
     </div>
 
 
