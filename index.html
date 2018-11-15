@@ -27,6 +27,9 @@
         <p>
             <button v-on:click="reverse" v-bind:class="buttonClass">{{ reverseButton.buttonText }}</button>  
             <button v-on:click="swap" v-bind:class="buttonClass">{{ swapButton.buttonText }}</button>  
+        </p>
+        <p>
+            <input v-model="newItem">
             <button v-on:click="add" v-bind:class="buttonClass">{{ addButton.buttonText }}</button>
         </p>
         <img v-bind:title="imgTitle" v-bind:src="imgSrc" v-bind:alt="imgAlt">

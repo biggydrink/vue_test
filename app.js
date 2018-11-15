@@ -37,6 +37,7 @@ let list = new Vue({
         addButton: {
             buttonText: 'Add',
         },
+        newItem: 'Add another name',
         reverseButton: {
             buttonText: 'Reverse',
         }
@@ -94,7 +95,7 @@ let list = new Vue({
             }
         },
         add: function() {
-            // nothing yet
+            this.myList.push(this.newItem);
         }
     }
 });
