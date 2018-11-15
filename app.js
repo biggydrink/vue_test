@@ -18,12 +18,20 @@ let text = new Vue({
 let list = new Vue({
     el: '#list_and_array',
     data: {
-        myList: [
+        visibleList: [],
+        catList: [
             'Kitties',
             'Cats',
             'Kittens',
             '고양이',
             '고양이 새끼'
+        ],
+        dogList: [
+            'Doggo',
+            'Pup',
+            'Dogs',
+            'Doge',
+            '개'
         ],
         cats: true,
         lede: "Here are some names for felines:",
@@ -47,13 +55,7 @@ let list = new Vue({
     methods: {
         swap: function() {
             if (this.cats) {
-                this.myList = [
-                    'Doggo',
-                    'Pup',
-                    'Dogs',
-                    'Doge',
-                    '개'
-                ];
+                this.visibleList = this.dogList;
                 this.lede = "Here are some names for canines:";
                 this.swapButton.buttonText = "See Cats";
                 this.buttonClass = 'button_dog';
@@ -64,13 +66,7 @@ let list = new Vue({
                 
                 condition.buttonClass = this.buttonClass;
             } else {
-                this.myList = [
-                    'Kitty',
-                    'Cat',
-                    'Kitten',
-                    '고양이',
-                    '고양이 새끼'
-                ];
+                this.visibleList = this.catList;
                 this.lede = "Here are some names for felines:";
                 this.swapButton.buttonText = "See Dogs";
                 this.buttonClass = "button_cat";
@@ -83,7 +79,7 @@ let list = new Vue({
             }
         },
         reverse: function() {
-            for (i = 0; i < list.myList.length; i++ ) {
+            for (i = 0; i < list.visibleList.length; i++ ) {
                 /* 
                 must use Vue.set instead of updating via list[index] so that Vue's getters/setters can run and get reactivity
                 can also use push/pop
@@ -91,15 +87,20 @@ let list = new Vue({
                 This is also probably why the tutorial uses objects with a 'text' string attriute instead of a plain list of strings like i do here
                 If you use objects and update the object.text attribute, then we have getters and setters again, and therefore reactivity
                 */
-                Vue.set(list.myList, i, list.myList[i].split('').reverse().join(''));
+                Vue.set(list.visibleList, i, list.visibleList[i].split('').reverse().join(''));
             }
         },
         add: function() {
-            this.myList.push(this.newItem);
+            // this ends up also updating either catList or dogList, whichever is currently visible
+            // How does it do that exactly? Must be because visibleList is set to equal either of those two lists in the swap function?
+            this.visibleList.push(this.newItem);
         }
     }
 });
 
+// Gives visibleList an initial value
+// Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
+list.visibleList = list.catList;
 
 let dynamic = new Vue({
     el: '#dynamo',
