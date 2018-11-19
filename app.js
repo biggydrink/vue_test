@@ -34,6 +34,7 @@ let list = new Vue({
             '개'
         ],
         cats: true,
+        textReversed: false,
         lede: "Here are some names for felines:",
         imgSrc: "To-infinity-and-beyond.jpeg",
         imgAlt: "cat in cardboard spaceship",
@@ -54,6 +55,9 @@ let list = new Vue({
 
     methods: {
         swap: function() {
+            if (this.textReversed) {
+                this.reverse();
+            }
             if (this.cats) {
                 this.visibleList = this.dogList;
                 this.lede = "Here are some names for canines:";
@@ -73,6 +77,7 @@ let list = new Vue({
                 this.imgSrc = "To-infinity-and-beyond.jpeg";
                 this.imgAlt = "cat in cardboard spaceship";
                 this.imgTitle = "You, my friend, are responsible for delaying my rendezvous with star command!!";
+                
                 this.cats = true;
                 
                 condition.buttonClass = this.buttonClass;
@@ -80,6 +85,8 @@ let list = new Vue({
         },
         reverse: function() {
             for (i = 0; i < list.visibleList.length; i++ ) {
+                // TODO Strings are now unreversed when swapping, but should also make a way to have strings added while reversed reversed before adding
+
                 /* 
                 must use Vue.set instead of updating via list[index] so that Vue's getters/setters can run and get reactivity
                 can also use push/pop
@@ -88,6 +95,8 @@ let list = new Vue({
                 If you use objects and update the object.text attribute, then we have getters and setters again, and therefore reactivity
                 */
                 Vue.set(list.visibleList, i, list.visibleList[i].split('').reverse().join(''));
+                
+                this.textReversed ? this.textReversed = false : this.textReversed = true;
             }
         },
         add: function() {
