@@ -17,31 +17,50 @@ let text = new Vue({
 
 let list = new Vue({
     el: '#list_and_array',
-    data: {
+    data: {       
+        cats: {
+            selected: true,
+            textReversed: false,
+            lede: 'Here are some names for felines:',
+            imgSrc: 'To-infinity-and-beyond.jpeg',
+            imgAlt: 'cat in cardboard spaceship',
+            imgTitle: 'You, my friend, are responsible for delaying my rendezvous with star command!',
+            buttonClass: 'button_cat',
+            swapButtonText: 'See Dogs',
+            catList: [
+                'Kitties',
+                'Cats',
+                'Kittens',
+                '고양이',
+                '고양이 새끼'
+            ]
+        },
+        dogs: {
+            selected: true,
+            textReversed: false,
+            lede: 'Here are some names for canines:',
+            imgSrc: 'codedoge.jpg',
+            imgAlt: 'doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow',
+            imgTitle: 'such title',
+            buttonClass: 'button_dog',
+            swapButtonText: 'See Cats',
+            dogList: [
+                'Doggo',
+                'Pup',
+                'Dogs',
+                'Doge',
+                '개'
+            ]
+        },
+
         visibleList: [],
-        catList: [
-            'Kitties',
-            'Cats',
-            'Kittens',
-            '고양이',
-            '고양이 새끼'
-        ],
-        dogList: [
-            'Doggo',
-            'Pup',
-            'Dogs',
-            'Doge',
-            '개'
-        ],
-        cats: true,
-        textReversed: false,
-        lede: "Here are some names for felines:",
-        imgSrc: "To-infinity-and-beyond.jpeg",
-        imgAlt: "cat in cardboard spaceship",
-        imgTitle: "You, my friend, are responsible for delaying my rendezvous with star command!",
-        buttonClass: 'button_cat',
+        lede: '', // this.cats.lede,
+        imgSrc: '', // this.cats.imgSrc,
+        imgAlt: '', // this.cats.imgAlt,
+        imgTitle: '', // this.cats.imgTitle,
+        buttonClass: '', // this.cats.buttonClass,
         swapButton: {
-            buttonText: 'See Dogs',
+            buttonText: '', // this.cats.swapButtonText,
         },
         addButton: {
             buttonText: 'Add',
@@ -55,6 +74,39 @@ let list = new Vue({
 
     methods: {
         swap: function() {
+            
+            if (this.cats.selected) {
+                this.dogs.selected = true;
+                this.cats.selected = false;
+
+                this.cats.catList = this.visibleList;
+                this.visibleList = this.dogs.dogList;
+
+                this.lede = this.dogs.lede;
+                this.swapButton.buttonText = this.dogs.swapButtonText;
+                this.buttonClass = this.dogs.buttonClass;
+                this.imgSrc = this.dogs.imgSrc;
+                this.imgAlt = this.dogs.imgAlt;
+                this.imgTitle = this.dogs.imgTitle;
+            } else {
+                this.cats.selected = true;
+                this.dogs.selected = false;
+
+                this.dogs.dogList = this.visibleList
+                this.visibleList = this.cats.catList;
+
+                this.lede = this.cats.lede;
+                this.swapButton.buttonText = this.cats.swapButtonText;
+                this.buttonClass = this.cats.buttonClass;
+                this.imgSrc = this.cats.imgSrc;
+                this.imgAlt = this.cats.imgAlt;
+                this.imgTitle = this.cats.imgTitle;
+            }
+            
+
+
+
+            /*
             if (this.textReversed) {
                 this.reverse();
             }
@@ -82,6 +134,7 @@ let list = new Vue({
                 
                 condition.buttonClass = this.buttonClass;
             }
+            */
         },
         reverse: function() {
             for (i = 0; i < list.visibleList.length; i++ ) {
@@ -94,7 +147,8 @@ let list = new Vue({
                 This is also probably why the tutorial uses objects with a 'text' string attriute instead of a plain list of strings like i do here
                 If you use objects and update the object.text attribute, then we have getters and setters again, and therefore reactivity
                 */
-                Vue.set(list.visibleList, i, list.visibleList[i].split('').reverse().join(''));
+
+                Vue.set(list.visibleList, i, reverseString(list.visibleList[i]));
                 
                 this.textReversed ? this.textReversed = false : this.textReversed = true;
             }
@@ -102,14 +156,21 @@ let list = new Vue({
         add: function() {
             // this ends up also updating either catList or dogList, whichever is currently visible
             // How does it do that exactly? Must be because visibleList is set to equal either of those two lists in the swap function?
-            this.visibleList.push(this.newItem);
+            if (this.textReversed) {
+                this.visibleList.push(reverseString(this.newItem));
+            } else {
+                this.visibleList.push(this.newItem);
+            }
+            
         }
     }
 });
 
 // Gives visibleList an initial value
 // Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
-list.visibleList = list.catList;
+list.visibleList = list.cats.catList;
+
+// TODO initialize everything this way?
 
 let dynamic = new Vue({
     el: '#dynamo',
@@ -138,3 +199,17 @@ let condition = new Vue({
         }
     }
 });
+
+/**
+ * 
+ * @param {String} toReverse
+ * String that you want to reverse
+ * 
+ * This function returns the reverse of the string you pass it.
+ * Example: 'Hello World!' will return '!dlorW olleH'
+ */
+let reverseString = function(toReverse) {
+
+    return toReverse.split('').reverse().join('');
+
+}
