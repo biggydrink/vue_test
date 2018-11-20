@@ -169,6 +169,12 @@ let list = new Vue({
 // Gives visibleList an initial value
 // Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
 list.visibleList = list.cats.catList;
+list.lede = list.cats.lede;
+list.imgSrc = list.cats.imgSrc;
+list.imgAlt = list.cats.imgAlt;
+list.imgTitle = list.cats.imgTitle;
+list.buttonClass = list.cats.buttonClass;
+list.swapButton.buttonText = list.cats.swapButtonText;
 
 // TODO initialize everything this way?
 
