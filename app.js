@@ -27,6 +27,7 @@ let list = new Vue({
             imgTitle: 'You, my friend, are responsible for delaying my rendezvous with star command!',
             buttonClass: 'button_cat',
             swapButtonText: 'See Dogs',
+            newItem: 'New kitty',
             catList: [
                 'Kitties',
                 'Cats',
@@ -44,6 +45,7 @@ let list = new Vue({
             imgTitle: 'such title',
             buttonClass: 'button_dog',
             swapButtonText: 'See Cats',
+            newItem: 'New doggy',
             dogList: [
                 'Doggo',
                 'Pup',
@@ -65,7 +67,7 @@ let list = new Vue({
         addButton: {
             buttonText: 'Add',
         },
-        newItem: 'Add another name',
+        newItem: '',
         reverseButton: {
             buttonText: 'Reverse',
         }
@@ -92,11 +94,12 @@ let list = new Vue({
                 this.imgSrc = this.dogs.imgSrc;
                 this.imgAlt = this.dogs.imgAlt;
                 this.imgTitle = this.dogs.imgTitle;
+                this.newItem = this.dogs.newItem;
             } else {
                 if (this.dogs.textReversed) {
                     this.reverse();
                 }
-                
+
                 this.cats.selected = true;
                 this.dogs.selected = false;
 
@@ -109,6 +112,7 @@ let list = new Vue({
                 this.imgSrc = this.cats.imgSrc;
                 this.imgAlt = this.cats.imgAlt;
                 this.imgTitle = this.cats.imgTitle;
+                this.newItem = this.cats.newItem;
             }
         },
         reverse: function() {
@@ -141,6 +145,12 @@ let list = new Vue({
             } else {
                 this.visibleList.push(this.newItem);
             }
+
+            if (this.cats.selected) {
+                this.cats.newItem = this.newItem;
+            } else {
+                this.dogs.newItem = this.newItem;
+            }
         }
     }
 });
@@ -152,6 +162,7 @@ list.lede = list.cats.lede;
 list.imgSrc = list.cats.imgSrc;
 list.imgAlt = list.cats.imgAlt;
 list.imgTitle = list.cats.imgTitle;
+list.newItem = list.cats.newItem;
 list.buttonClass = list.cats.buttonClass;
 list.swapButton.buttonText = list.cats.swapButtonText;
 
