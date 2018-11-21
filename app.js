@@ -76,6 +76,10 @@ let list = new Vue({
         swap: function() {
             
             if (this.cats.selected) {
+                if (this.cats.textReversed) {
+                    this.reverse();
+                }
+
                 this.dogs.selected = true;
                 this.cats.selected = false;
 
@@ -89,6 +93,10 @@ let list = new Vue({
                 this.imgAlt = this.dogs.imgAlt;
                 this.imgTitle = this.dogs.imgTitle;
             } else {
+                if (this.dogs.textReversed) {
+                    this.reverse();
+                }
+                
                 this.cats.selected = true;
                 this.dogs.selected = false;
 
@@ -102,39 +110,6 @@ let list = new Vue({
                 this.imgAlt = this.cats.imgAlt;
                 this.imgTitle = this.cats.imgTitle;
             }
-            
-
-
-
-            /*
-            if (this.textReversed) {
-                this.reverse();
-            }
-            if (this.cats) {
-                this.visibleList = this.dogList;
-                this.lede = "Here are some names for canines:";
-                this.swapButton.buttonText = "See Cats";
-                this.buttonClass = 'button_dog';
-                this.imgSrc = "codedoge.jpg";
-                this.imgAlt = "doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow";
-                this.imgTitle = "such title";
-                this.cats = false;
-                
-                condition.buttonClass = this.buttonClass;
-            } else {
-                this.visibleList = this.catList;
-                this.lede = "Here are some names for felines:";
-                this.swapButton.buttonText = "See Dogs";
-                this.buttonClass = "button_cat";
-                this.imgSrc = "To-infinity-and-beyond.jpeg";
-                this.imgAlt = "cat in cardboard spaceship";
-                this.imgTitle = "You, my friend, are responsible for delaying my rendezvous with star command!!";
-                
-                this.cats = true;
-                
-                condition.buttonClass = this.buttonClass;
-            }
-            */
         },
         reverse: function() {
             for (i = 0; i < list.visibleList.length; i++ ) {
@@ -149,24 +124,28 @@ let list = new Vue({
                 */
 
                 Vue.set(list.visibleList, i, reverseString(list.visibleList[i]));
-                
-                this.textReversed ? this.textReversed = false : this.textReversed = true;
+            }
+            
+            if (this.cats.selected) {
+                this.cats.textReversed ? this.cats.textReversed = false : this.cats.textReversed = true;
+            } else {
+                this.dogs.textReversed ? this.dogs.textReversed = false : this.dogs.textReversed = true;
             }
         },
         add: function() {
             // this ends up also updating either catList or dogList, whichever is currently visible
             // How does it do that exactly? Must be because visibleList is set to equal either of those two lists in the swap function?
-            if (this.textReversed) {
+            
+            if ((this.cats.selected && this.cats.textReversed) || (this.dogs.selected && this.dogs.textReversed)) {
                 this.visibleList.push(reverseString(this.newItem));
             } else {
                 this.visibleList.push(this.newItem);
             }
-            
         }
     }
 });
 
-// Gives visibleList an initial value
+// Gives list data values initial data
 // Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
 list.visibleList = list.cats.catList;
 list.lede = list.cats.lede;
@@ -175,8 +154,6 @@ list.imgAlt = list.cats.imgAlt;
 list.imgTitle = list.cats.imgTitle;
 list.buttonClass = list.cats.buttonClass;
 list.swapButton.buttonText = list.cats.swapButtonText;
-
-// TODO initialize everything this way?
 
 let dynamic = new Vue({
     el: '#dynamo',
