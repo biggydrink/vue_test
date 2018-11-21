@@ -17,36 +17,57 @@ let text = new Vue({
 
 let list = new Vue({
     el: '#list_and_array',
-    data: {
+    data: {       
+        cats: {
+            selected: true,
+            textReversed: false,
+            lede: 'Here are some names for felines:',
+            imgSrc: 'To-infinity-and-beyond.jpeg',
+            imgAlt: 'cat in cardboard spaceship',
+            imgTitle: 'You, my friend, are responsible for delaying my rendezvous with star command!',
+            buttonClass: 'button_cat',
+            swapButtonText: 'See Dogs',
+            newItem: 'New kitty',
+            catList: [
+                'Kitties',
+                'Cats',
+                'Kittens',
+                '고양이',
+                '고양이 새끼'
+            ]
+        },
+        dogs: {
+            selected: true,
+            textReversed: false,
+            lede: 'Here are some names for canines:',
+            imgSrc: 'codedoge.jpg',
+            imgAlt: 'doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow',
+            imgTitle: 'such title',
+            buttonClass: 'button_dog',
+            swapButtonText: 'See Cats',
+            newItem: 'New doggy',
+            dogList: [
+                'Doggo',
+                'Pup',
+                'Dogs',
+                'Doge',
+                '개'
+            ]
+        },
+
         visibleList: [],
-        catList: [
-            'Kitties',
-            'Cats',
-            'Kittens',
-            '고양이',
-            '고양이 새끼'
-        ],
-        dogList: [
-            'Doggo',
-            'Pup',
-            'Dogs',
-            'Doge',
-            '개'
-        ],
-        cats: true,
-        textReversed: false,
-        lede: "Here are some names for felines:",
-        imgSrc: "To-infinity-and-beyond.jpeg",
-        imgAlt: "cat in cardboard spaceship",
-        imgTitle: "You, my friend, are responsible for delaying my rendezvous with star command!",
-        buttonClass: 'button_cat',
+        lede: '', // this.cats.lede,
+        imgSrc: '', // this.cats.imgSrc,
+        imgAlt: '', // this.cats.imgAlt,
+        imgTitle: '', // this.cats.imgTitle,
+        buttonClass: '', // this.cats.buttonClass,
         swapButton: {
-            buttonText: 'See Dogs',
+            buttonText: '', // this.cats.swapButtonText,
         },
         addButton: {
             buttonText: 'Add',
         },
-        newItem: 'Add another name',
+        newItem: '',
         reverseButton: {
             buttonText: 'Reverse',
         }
@@ -55,32 +76,43 @@ let list = new Vue({
 
     methods: {
         swap: function() {
-            if (this.textReversed) {
-                this.reverse();
-            }
-            if (this.cats) {
-                this.visibleList = this.dogList;
-                this.lede = "Here are some names for canines:";
-                this.swapButton.buttonText = "See Cats";
-                this.buttonClass = 'button_dog';
-                this.imgSrc = "codedoge.jpg";
-                this.imgAlt = "doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow";
-                this.imgTitle = "such title";
-                this.cats = false;
-                
-                condition.buttonClass = this.buttonClass;
+            
+            if (this.cats.selected) {
+                if (this.cats.textReversed) {
+                    this.reverse();
+                }
+
+                this.dogs.selected = true;
+                this.cats.selected = false;
+
+                this.cats.catList = this.visibleList;
+                this.visibleList = this.dogs.dogList;
+
+                this.lede = this.dogs.lede;
+                this.swapButton.buttonText = this.dogs.swapButtonText;
+                this.buttonClass = this.dogs.buttonClass;
+                this.imgSrc = this.dogs.imgSrc;
+                this.imgAlt = this.dogs.imgAlt;
+                this.imgTitle = this.dogs.imgTitle;
+                this.newItem = this.dogs.newItem;
             } else {
-                this.visibleList = this.catList;
-                this.lede = "Here are some names for felines:";
-                this.swapButton.buttonText = "See Dogs";
-                this.buttonClass = "button_cat";
-                this.imgSrc = "To-infinity-and-beyond.jpeg";
-                this.imgAlt = "cat in cardboard spaceship";
-                this.imgTitle = "You, my friend, are responsible for delaying my rendezvous with star command!!";
-                
-                this.cats = true;
-                
-                condition.buttonClass = this.buttonClass;
+                if (this.dogs.textReversed) {
+                    this.reverse();
+                }
+
+                this.cats.selected = true;
+                this.dogs.selected = false;
+
+                this.dogs.dogList = this.visibleList
+                this.visibleList = this.cats.catList;
+
+                this.lede = this.cats.lede;
+                this.swapButton.buttonText = this.cats.swapButtonText;
+                this.buttonClass = this.cats.buttonClass;
+                this.imgSrc = this.cats.imgSrc;
+                this.imgAlt = this.cats.imgAlt;
+                this.imgTitle = this.cats.imgTitle;
+                this.newItem = this.cats.newItem;
             }
         },
         reverse: function() {
@@ -94,22 +126,45 @@ let list = new Vue({
                 This is also probably why the tutorial uses objects with a 'text' string attriute instead of a plain list of strings like i do here
                 If you use objects and update the object.text attribute, then we have getters and setters again, and therefore reactivity
                 */
-                Vue.set(list.visibleList, i, list.visibleList[i].split('').reverse().join(''));
-                
-                this.textReversed ? this.textReversed = false : this.textReversed = true;
+
+                Vue.set(list.visibleList, i, reverseString(list.visibleList[i]));
+            }
+            
+            if (this.cats.selected) {
+                this.cats.textReversed ? this.cats.textReversed = false : this.cats.textReversed = true;
+            } else {
+                this.dogs.textReversed ? this.dogs.textReversed = false : this.dogs.textReversed = true;
             }
         },
         add: function() {
             // this ends up also updating either catList or dogList, whichever is currently visible
             // How does it do that exactly? Must be because visibleList is set to equal either of those two lists in the swap function?
-            this.visibleList.push(this.newItem);
+            
+            if ((this.cats.selected && this.cats.textReversed) || (this.dogs.selected && this.dogs.textReversed)) {
+                this.visibleList.push(reverseString(this.newItem));
+            } else {
+                this.visibleList.push(this.newItem);
+            }
+
+            if (this.cats.selected) {
+                this.cats.newItem = this.newItem;
+            } else {
+                this.dogs.newItem = this.newItem;
+            }
         }
     }
 });
 
-// Gives visibleList an initial value
+// Gives list data values initial data
 // Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
-list.visibleList = list.catList;
+list.visibleList = list.cats.catList;
+list.lede = list.cats.lede;
+list.imgSrc = list.cats.imgSrc;
+list.imgAlt = list.cats.imgAlt;
+list.imgTitle = list.cats.imgTitle;
+list.newItem = list.cats.newItem;
+list.buttonClass = list.cats.buttonClass;
+list.swapButton.buttonText = list.cats.swapButtonText;
 
 let dynamic = new Vue({
     el: '#dynamo',
@@ -138,3 +193,17 @@ let condition = new Vue({
         }
     }
 });
+
+/**
+ * 
+ * @param {String} toReverse
+ * String that you want to reverse
+ * 
+ * This function returns the reverse of the string you pass it.
+ * Example: 'Hello World!' will return '!dlorW olleH'
+ */
+let reverseString = function(toReverse) {
+
+    return toReverse.split('').reverse().join('');
+
+}
