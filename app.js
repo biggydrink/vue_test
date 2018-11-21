@@ -55,14 +55,15 @@ let list = new Vue({
             ]
         },
 
+        // Initialized below with list.cat data
         visibleList: [],
-        lede: '', // this.cats.lede,
-        imgSrc: '', // this.cats.imgSrc,
-        imgAlt: '', // this.cats.imgAlt,
-        imgTitle: '', // this.cats.imgTitle,
-        buttonClass: '', // this.cats.buttonClass,
+        lede: '',
+        imgSrc: '',
+        imgAlt: '',
+        imgTitle: '',
+        buttonClass: '',
         swapButton: {
-            buttonText: '', // this.cats.swapButtonText,
+            buttonText: '',
         },
         addButton: {
             buttonText: 'Add',
@@ -76,7 +77,7 @@ let list = new Vue({
 
     methods: {
         swap: function() {
-            
+            // Swaps data between cat and dog objects
             if (this.cats.selected) {
                 if (this.cats.textReversed) {
                     this.reverse();
@@ -116,9 +117,8 @@ let list = new Vue({
             }
         },
         reverse: function() {
+            // Rerverses everything currently in visible list. Updates either cat or dog textReversed flag
             for (i = 0; i < list.visibleList.length; i++ ) {
-                // TODO Strings are now unreversed when swapping, but should also make a way to have strings added while reversed reversed before adding
-
                 /* 
                 must use Vue.set instead of updating via list[index] so that Vue's getters/setters can run and get reactivity
                 can also use push/pop
@@ -137,6 +137,7 @@ let list = new Vue({
             }
         },
         add: function() {
+            // Adds current newItem to the current visible list
             // this ends up also updating either catList or dogList, whichever is currently visible
             // How does it do that exactly? Must be because visibleList is set to equal either of those two lists in the swap function?
             
