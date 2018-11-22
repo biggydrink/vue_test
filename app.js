@@ -13,6 +13,13 @@ let text = new Vue({
     }
 });
 
+let links = new Vue({
+    el: '#links',
+    data: {
+        componentsLink: "components.html",
+        componentsLinkText: "To components testing page"
+    }
+})
 
 
 let list = new Vue({

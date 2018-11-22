@@ -9,6 +9,7 @@
 
 <body>
 
+    <!-- Basic dynamic testing (v-bind) -->
     <div id="vue_text">
         <span v-bind:title="title">
            {{ message }} 
@@ -17,6 +18,12 @@
         
     </div>
 
+    <div id="links">
+        <p><a v-bind:href="componentsLink">{{ componentsLinkText }}</a></p>
+    </div>
+
+    <!-- List and array testing (v-for) -->
+    <!-- Added v-bind, v-on -->
     <div id="list_and_array">
         <p>{{ lede }}</p>
         <ul>
@@ -37,11 +44,15 @@
             <!-- Doge from https://www.techrepublic.com/pictures/such-tech-much-doge-15-of-our-own-it-inspired-memes/4/-->
     </div>
 
+
+    <!-- User input testing (v-model) -->
     <div id="dynamo">
         <p>{{ message }}</p>
         <input v-model="message">
     </div>
 
+
+    <!-- Conditional testing (v-if) -->
     <div id="conditional">
     
         <!-- Can v-if set anything besides visibility? -->
@@ -52,9 +63,9 @@
     </div>
 
 
-    <!-- production version, optimized for size and speed -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>-->
-    <script src="vue.js"></script>
+    <!-- Scripts -->
+    <!-- Vue production version, optimized for size and speed -->
+    <script src="vue.js"></script> <!-- web source: https://cdn.jsdelivr.net/npm/vue -->
     <script src="app.js"></script>
 
 </body>
