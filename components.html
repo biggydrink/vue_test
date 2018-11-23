@@ -15,12 +15,63 @@
 
     <!-- Component test -->
     <div id="comp_test">
+        <h3>Component</h3>
+        
+        <p>Tags</p>
+        <ol>
+            <todo-item
+            v-for="tag in tags"
+            v-bind:todo="tag"
+            v-bind:key="tag.id">
+            </todo-item>
+        </ol>
+
+        
+        <p>Bindings</p>
+        <ol>
+            <todo-item
+            v-for="bind in bindings"
+            v-bind:todo="bind"
+            v-bind:key="bind.id">
+            </todo-item>
+        </ol>
+        
+
+        <p>Random grocery list</p>
         <ol>
             <todo-item
             v-for="item in groceryList"
             v-bind:todo="item"
-            v-bind:key="item.id"> <!-- Removing this does not seem to affect the page - ?? -->
+            v-bind:key="item.id">
             </todo-item>
+            <!-- Removing the v-bind:key does not seem to affect the page - ?? -->
+            <!-- Changing the items in groceryList to strings instead of objects works as long as the template is consistent -->
+            <!-- Does not work to change the todo binding to item.text and remove .text from the template -->
+        </ol>
+    </div>
+
+    <div id="not_comp">
+        <h3>Not Component</h3>
+        
+        <p>Tags</p>
+        <ol>
+            <li v-for="tag in tags">
+                {{ tag }}
+            </li>
+        </ol>
+        
+        <p>Bindings</p>
+        <ol>
+            <li v-for="bind in bindings">
+                {{ bind }}
+            </li>
+        </ol>
+
+        <p>Taco grocery list</p>
+        <ol>
+            <li v-for="item in groceryList">
+                {{ item.text }}
+            </li>
         </ol>
     </div>
 
