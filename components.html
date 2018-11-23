@@ -10,7 +10,24 @@
 
 <body>
 
-    
+    <!-- Link back to main page -->
+    <h2><a href="index.html">Back to home page</a></h2>
+
+    <!-- Component test -->
+    <div id="comp_test">
+        <ol>
+            <todo-item
+            v-for="item in groceryList"
+            v-bind:todo="item"
+            v-bind:key="item.id"> <!-- Removing this does not seem to affect the page - ?? -->
+            </todo-item>
+        </ol>
+    </div>
+
+    <!-- Scripts -->
+    <!-- Vue production version, optimized for size and speed -->
+    <script src="vue.js"></script> <!-- web source: https://cdn.jsdelivr.net/npm/vue -->
+    <script src="components.js"></script>
 
 </body>
 </html>
