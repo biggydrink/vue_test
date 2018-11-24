@@ -3,6 +3,16 @@ Vue.component ('todo-item', {
     template: '<li>{{ todo.text }}</li>'
 })
 
+/*
+Not working
+
+Vue.component ('link-item', {
+    props: ['link'],
+    template: '<li><a href={{ link.url }}>{{ link.text }}</a></li>'
+    // template: '<li><a>{{ link.text }}</a></li>'
+})
+*/
+
 let firstComp = new Vue({
     el: '#comp_test',
     data: {
@@ -46,6 +56,16 @@ let notComp = new Vue({
         ],
         bindings: [
             'v-for'
+        ]
+    }
+})
+
+let links = new Vue({
+    el: '#links',
+    data: {
+        linkList: [
+            { text: "Home page", url: "index.html" },
+            { text: "Home page built with components", url: "index_components.html" }
         ]
     }
 })

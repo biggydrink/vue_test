@@ -5,13 +5,22 @@
     <meta charset="utf-8">
     <meta name="vue_components">
     <title id="site_title">{{ title }}</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/styles.css">
 </head>
 
 <body>
 
     <!-- Link back to main page -->
-    <h2><a href="index.html">Back to home page</a></h2>
+    <div id="links">
+        <h3>Links</h3>
+        <ul>
+            <li v-for="link in linkList">
+                <a v-bind:href="link.url">{{ link.text}} </a>
+            </li>
+        </ul>
+    </div>
+    
+    <!-- <a href="index.html">Back to home page</a> -->
 
     <!-- Component test -->
     <div id="comp_test">
@@ -77,8 +86,8 @@
 
     <!-- Scripts -->
     <!-- Vue production version, optimized for size and speed -->
-    <script src="vue.js"></script> <!-- web source: https://cdn.jsdelivr.net/npm/vue -->
-    <script src="components.js"></script>
+    <script src="scripts/vue.js"></script> <!-- web source: https://cdn.jsdelivr.net/npm/vue -->
+    <script src="scripts/components.js"></script>
 
 </body>
 </html>

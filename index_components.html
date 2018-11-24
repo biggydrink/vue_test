@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="index_with_components">
+    <title id="main_title">{{ title}} </title>
+    <link rel="stylesheet" href="styles/indexComponentsStyles.css">
+</head>
+
+<body>
+
+
+    <p>
+        Rebuilding the index.html page with components.
+
+    </p>
+    <!-- Links -->
+    <div id="links">
+            <h3>Links</h3>
+            <ul>
+                <li v-for="link in linkList">
+                    <a v-bind:href="link.url">{{ link.text }}</a>
+                </li>
+            </ul>
+            
+        </div>
+    
+        <!-- Basic dynamic testing (v-bind) -->
+        <div id="vue_text">
+            <span v-bind:title="title">
+               {{ message }} 
+            </span>
+            <p>{{ title }}</p>
+            
+        </div>
+    
+        
+    
+        <!-- List and array testing (v-for) -->
+        <!-- Added v-bind, v-on -->
+        <div id="list_and_array">
+            <p>{{ lede }}</p>
+            <ul>
+                <li v-for="item in visibleList">
+                    {{ item }}
+                </li>
+            </ul>
+            <p>
+                <button v-on:click="reverse" v-bind:class="buttonClass">{{ reverseButton.buttonText }}</button>  
+                <button v-on:click="swap" v-bind:class="buttonClass">{{ swapButton.buttonText }}</button>  
+            </p>
+            <p>
+                <input v-model="newItem">
+                <button v-on:click="add" v-bind:class="buttonClass">{{ addButton.buttonText }}</button>
+            </p>
+            <img v-bind:title="imgTitle" v-bind:src="imgSrc" v-bind:alt="imgAlt">
+                <!-- Cat from http://www.cutestpaw.com/articles/50-cute-cats-make-your-life-happier/-->
+                <!-- Doge from https://www.techrepublic.com/pictures/such-tech-much-doge-15-of-our-own-it-inspired-memes/4/-->
+        </div>
+    
+    
+        <!-- User input testing (v-model) -->
+        <div id="dynamo">
+            <p>{{ message }}</p>
+            <input v-model="message">
+        </div>
+    
+    
+        <!-- Conditional testing (v-if) -->
+        <div id="conditional">
+        
+            <!-- Can v-if set anything besides visibility? -->
+            <!-- How does the visibility actually work? Just removes it from the page i guess? -->
+        <span v-if="seen">Now you see me</span>
+        <br>
+        <button v-bind:class="buttonClass" v-on:click="hide">{{ buttonText }}</button>
+        </div>
+    
+    
+        <!-- Scripts -->
+        <!-- Vue production version, optimized for size and speed -->
+        <script src="scripts/vue.js"></script> <!-- web source: https://cdn.jsdelivr.net/npm/vue -->
+        <script src="scripts/indexComponents.js"></script>
+    
+</body>
+</html>
