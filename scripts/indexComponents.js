@@ -3,7 +3,7 @@
 let mainTitle = new Vue({
     el: '#main_title',
     data: {
-        title: 'Vue Tests'
+        title: 'Component Tests'
     }
 });
 
