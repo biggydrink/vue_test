@@ -13,6 +13,15 @@ let text = new Vue({
     }
 });
 
+let links = new Vue({
+    el: '#links',
+    data: {
+        componentsLink: "components.html",
+        componentsLinkText: "To components testing page",
+        indexComponentsLink: "index_components.html",
+        indexComponentsLinkText: "To index page with components"
+    }
+})
 
 
 let list = new Vue({
@@ -22,7 +31,7 @@ let list = new Vue({
             selected: true,
             textReversed: false,
             lede: 'Here are some names for felines:',
-            imgSrc: 'To-infinity-and-beyond.jpeg',
+            imgSrc: 'images/To-infinity-and-beyond.jpeg',
             imgAlt: 'cat in cardboard spaceship',
             imgTitle: 'You, my friend, are responsible for delaying my rendezvous with star command!',
             buttonClass: 'button_cat',
@@ -40,7 +49,7 @@ let list = new Vue({
             selected: true,
             textReversed: false,
             lede: 'Here are some names for canines:',
-            imgSrc: 'codedoge.jpg',
+            imgSrc: 'images/codedoge.jpg',
             imgAlt: 'doge meme - coding: <doge>, hello world, much intelligent, many html, wow how skill, code doge thx, very computer, such programming, wow',
             imgTitle: 'such title',
             buttonClass: 'button_dog',
