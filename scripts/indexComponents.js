@@ -66,7 +66,7 @@ let list = new Vue({
             ]
         },
 
-        // Initialized below with list.cat data
+        // Initialized with created hook
         visibleList: [],
         lede: '',
         imgSrc: '',
@@ -83,7 +83,17 @@ let list = new Vue({
         reverseButton: {
             buttonText: 'Reverse',
         }
-        
+    },
+    created: function() {
+        // Initializes main data from cats
+        this.visibleList = this.cats.catList;
+        this.lede = this.cats.lede;
+        this.imgSrc = this.cats.imgSrc;
+        this.imgAlt = this.cats.imgAlt;
+        this.imgTitle = this.cats.imgTitle;
+        this.newItem = this.cats.newItem;
+        this.buttonClass = this.cats.buttonClass;
+        this.swapButton.buttonText = this.cats.swapButtonText;
     },
 
     methods: {
@@ -167,16 +177,6 @@ let list = new Vue({
     }
 });
 
-// Gives list data values initial data
-// Better to do this, or to set visible list = to the same strings as catList in the Vue instance data?
-list.visibleList = list.cats.catList;
-list.lede = list.cats.lede;
-list.imgSrc = list.cats.imgSrc;
-list.imgAlt = list.cats.imgAlt;
-list.imgTitle = list.cats.imgTitle;
-list.newItem = list.cats.newItem;
-list.buttonClass = list.cats.buttonClass;
-list.swapButton.buttonText = list.cats.swapButtonText;
 
 let dynamic = new Vue({
     el: '#dynamo',
