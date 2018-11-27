@@ -13,8 +13,7 @@
     <div id="links">
         <h3>Links</h3>
         <ul>
-            <li><a v-bind:href="componentsLink">{{ componentsLinkText }}</a></li>
-            <li><a v-bind:href="indexComponentsLink">{{ indexComponentsLinkText }}</a></li>
+            <li v-for="link in linkList"><a v-bind:href="link.url">{{ link.text }}</a></li>
         </ul>
         
     </div>

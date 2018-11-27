@@ -16,10 +16,42 @@ let text = new Vue({
 let links = new Vue({
     el: '#links',
     data: {
-        componentsLink: "components.html",
-        componentsLinkText: "To components testing page",
-        indexComponentsLink: "index_components.html",
-        indexComponentsLinkText: "To index page with components"
+        linkList: [
+            { text: 'To components testing page', url: 'components.html' },
+            { text: 'To index page with components', url: 'index_components.html' }
+        ],
+        bCr: 'running before create()',
+        cr: 'running created()',
+        bMnt: 'running beforeMount()',
+        mnt: 'running mounted()',
+        bUpd: 'running beforeUpdate()',
+        upd: 'running updated()',
+        bDest: 'running beforeDestroy()',
+        dest: 'running destroyed()'
+    },
+    beforeCreate: function() {
+        console.log(this.bCr);
+    },
+    created: function() {
+        console.log(this.cr);
+    },
+    beforeMount: function() {
+        console.log(this.bMnt);
+    },
+    mounted: function() {
+        console.log(this.mnt)
+    },
+    beforeUpdate: function() {
+        console.log(this.bUpd);
+    },
+    update: function() {
+        console.log(this.upd);
+    },
+    beforeDestroy: function() {
+        console.log(this.bDest);
+    },
+    destroyed: function() {
+        console.log(dest);
     }
 })
 
